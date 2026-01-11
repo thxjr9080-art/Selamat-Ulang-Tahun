@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💖</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+body {
+  background: linear-gradient(135deg, #ff9acb, #ffc1dd);
+  overflow: hidden;
+}
+
+/* SLIDE */
+.slide {
+  display: none;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.active {
+  display: flex;
+}
+
+/* TEKS */
+h1 {
+  font-size: 3em;
+  animation: bounce 1s infinite;
+}
+
+p {
+  font-size: 1.6em;
+  margin-top: 20px;
+}
+
+/* TOMBOL */
+button {
+  margin-top: 40px;
+  padding: 14px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background: hotpink;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.15);
+  background: deeppink;
+}
+
+/* ANIMASI */
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* HATI */
+.heart {
+  position: absolute;
+  color: #ff3f8e;
+  font-size: 30px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh) scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIK -->
+<audio id="musik" loop>
+  <source src="ramein.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SLIDE 1 -->
+<div class="slide active">
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <p>Ada kejutan kecil buat kamu 😆💗</p>
+  <button onclick="nextSlide()">Klik aku 🎶</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <h1>🎂 Selamat Ulang Tahun</h1>
+  <p>Semoga hidupmu manis seperti kue 🍰</p>
+  <button onclick="nextSlide()">Lanjut 💕</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <h1>💖 Buat Kamu</h1>
+  <p>Yang selalu bikin dunia lebih lucu 😜</p>
+  <button onclick="nextSlide()">Terakhir 🥰</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <h1>🎊 I Love U 🎊</h1>
+  <p>Enjoy your special day 💞</p>
+</div>
+
+<script>
+let i = 0;
+const slides = document.querySelectorAll('.slide');
+const musik = document.getElementById("musik");
+
+/* SLIDE + MUSIK */
+function nextSlide() {
+  if (musik.paused) {
+    musik.play();
+    startHearts(); // animasi mulai bareng musik
+  }
+
+  slides[i].classList.remove('active');
+  i++;
+  if (i >= slides.length) i = slides.length - 1;
+  slides[i].classList.add('active');
+}
+
+/* HATI ROMANTIS (sinkron musik) */
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 30) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }, 400); // tempo lucu-romantis
+}
+</script>
+
+</body>
+</html>
