@@ -2,17 +2,18 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday 💖</title>
+<title>Happy Birthday Yaaa iwinnn💖</title>
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Comic Sans MS', cursive;
+  font-family: "Comic Sans MS", cursive;
 }
 
 body {
+  height: 100vh;
   background: linear-gradient(135deg, #ff9acb, #ffc1dd);
   overflow: hidden;
 }
@@ -28,7 +29,7 @@ body {
   flex-direction: column;
 }
 
-.active {
+.slide.active {
   display: flex;
 }
 
@@ -39,7 +40,7 @@ h1 {
 }
 
 p {
-  font-size: 1.6em;
+  font-size: 1.5em;
   margin-top: 20px;
 }
 
@@ -57,8 +58,8 @@ button {
 }
 
 button:hover {
-  transform: scale(1.15);
   background: deeppink;
+  transform: scale(1.15);
 }
 
 /* ANIMASI */
@@ -71,9 +72,8 @@ button:hover {
 /* HATI */
 .heart {
   position: absolute;
-  color: #ff3f8e;
   font-size: 30px;
-  animation: float 6s linear infinite;
+  animation: float 6s linear forwards;
 }
 
 @keyframes float {
@@ -94,26 +94,27 @@ button:hover {
 <!-- MUSIK -->
 <audio id="musik" loop>
   <source src="ramein.mp3" type="audio/mpeg">
+  Browser tidak mendukung audio
 </audio>
 
 <!-- SLIDE 1 -->
 <div class="slide active">
   <h1>🎉 Happy Birthday 🎉</h1>
-  <p>Ada kejutan kecil buat kamu 😆💗</p>
+  <p>Ada kejutan kecil buat kamu 😆💖</p>
   <button onclick="nextSlide()">Klik aku 🎶</button>
 </div>
 
 <!-- SLIDE 2 -->
 <div class="slide">
   <h1>🎂 Selamat Ulang Tahun</h1>
-  <p>Semoga hidupmu manis seperti kue 🍰</p>
+  <p>Semoga di tahun ini iwin jadi personal yang lebih baik dan juga bisa buat orang tua iwin bangga 🍰</p>
   <button onclick="nextSlide()">Lanjut 💕</button>
 </div>
 
 <!-- SLIDE 3 -->
 <div class="slide">
   <h1>💖 Buat Kamu</h1>
-  <p>Yang selalu bikin dunia lebih lucu 😜</p>
+  <p>Yang selalu bikin hari jadi lebih lucu 😜</p>
   <button onclick="nextSlide()">Terakhir 🥰</button>
 </div>
 
@@ -124,37 +125,40 @@ button:hover {
 </div>
 
 <script>
-let i = 0;
-const slides = document.querySelectorAll('.slide');
+let current = 0;
+const slides = document.querySelectorAll(".slide");
 const musik = document.getElementById("musik");
+let heartInterval;
 
-/* SLIDE + MUSIK */
+/* PINDAH SLIDE + MULAI MUSIK */
 function nextSlide() {
   if (musik.paused) {
     musik.play();
-    startHearts(); // animasi mulai bareng musik
+    startHearts();
   }
 
-  slides[i].classList.remove('active');
-  i++;
-  if (i >= slides.length) i = slides.length - 1;
-  slides[i].classList.add('active');
+  slides[current].classList.remove("active");
+  current++;
+  if (current >= slides.length) current = slides.length - 1;
+  slides[current].classList.add("active");
 }
 
-/* HATI ROMANTIS (sinkron musik) */
+/* ANIMASI HATI SINKRON MUSIK */
 function startHearts() {
-  setInterval(() => {
+  heartInterval = setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "💖";
     heart.style.left = Math.random() * 100 + "vw";
+    heart.style.color = "hotpink";
     heart.style.fontSize = (20 + Math.random() * 30) + "px";
+
     document.body.appendChild(heart);
 
     setTimeout(() => {
       heart.remove();
     }, 6000);
-  }, 400); // tempo lucu-romantis
+  }, 400);
 }
 </script>
 
